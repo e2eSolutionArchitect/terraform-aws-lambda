@@ -1,9 +1,9 @@
 resource "aws_lambda_function" "this" {
 
-  filename         = var.file_name         #"lambda_function_upload.zip"
-  function_name    = var.function_name     #"lambda_function_name"
-  role             = aws_iam_role.this.arn #var.lambda_role_arn
-  handler          = var.lambda_handler    #"index.handler"
+  filename         = var.file_name     #"lambda_function_upload.zip"
+  function_name    = var.function_name #"lambda_function_name"
+  role             = var.lambda_role_arn
+  handler          = var.lambda_handler #"index.handler"
   source_code_hash = var.source_code_hash
   publish          = true
   runtime          = var.lambda_runtime
@@ -20,7 +20,6 @@ resource "aws_lambda_function" "this" {
   #     S3_BUCKET = "s3-bucket-name-enter-here"
   #   }
   # }
-  depends_on = [aws_iam_role.this]
 }
 
 
@@ -38,25 +37,6 @@ resource "aws_lambda_alias" "lambda_alias" {
   depends_on = [aws_lambda_function.this]
 }
 
-resource "aws_iam_role" "this" {
-  name = "iam-${var.function_name}"
-
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": ""
-    }
-  ]
-}
-EOF
-}
 
 resource "aws_cloudwatch_log_group" "this" {
   name              = "/aws/lambda/${var.function_name}"
