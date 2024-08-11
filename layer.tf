@@ -1,4 +1,4 @@
-resource "aws_lambda_layer_version" "main" {
+resource "aws_lambda_layer_version" "version" {
 	  layer_name       = var.layer_name
 	  description      = var.layer_name
 	  s3_bucket        = var.s3_bucket_id
