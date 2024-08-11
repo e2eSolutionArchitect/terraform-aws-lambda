@@ -85,3 +85,34 @@ variable "retention_in_days" {
   type        = number
   default     = 14
 }
+
+variable "layer_file_name" {
+  description = "layer_file_name"
+  type        = string
+  default     = ""
+}
+
+variable "layer_source_code_hash" {
+  description = "layer_source_code_hash"
+  type        = string
+  default     = ""
+}
+
+variable "layer_name" {
+  description = "layer_name"
+  type        = string
+  default     = ""
+}
+
+
+variable "s3_bucket_id" {
+  description = "s3_bucket_id for layer zip file"
+  type        = string
+  default     = ""
+}
+
+variable "s3_layer_key" {
+  description = "s3_layer_key dir location"
+  type        = string
+  default     = ""
+}
